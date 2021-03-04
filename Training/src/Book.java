@@ -91,7 +91,7 @@ public class Book
       temp.FillContact();
       contacts.remove(book_button-1);
       contacts.add(book_button-1,temp);
-      System.out.printf("\nОК!\n\n");
+      System.out.printf("\n\n");
     }
 
     public void ShowWrongCom()
@@ -133,14 +133,15 @@ public class Book
         myBookEnum=bookEnum.bookIsOpened;
     }
 
-    public void WriteToFile(String path) throws IOException {
-     File bookFile = new File(path);
-     PrintWriter writeToFile = new PrintWriter(new FileWriter(bookFile,true));
-     int i = contacts.size();
-     Note tmpNote = contacts.get(i-1);
-     writeToFile.println(i+". "+tmpNote.GetNameNote()+" "+tmpNote.GetSecondNameNote()+" "+tmpNote.GetPhoneNumberNote()+" ");
-     writeToFile.close();
+     public void WriteToFile(String path) throws IOException {
+         File bookFile = new File(path);
+         PrintWriter writeToFile = new PrintWriter(new FileWriter(bookFile));
 
-    }
+         for (Note n : contacts) {
+              int i = contacts.indexOf(n);
 
+              writeToFile.println((i+1) + ". " + n.GetNameNote() + " " + n.GetSecondNameNote() + " " + n.GetPhoneNumberNote() + " ");
+         }
+         writeToFile.close();
+     }
 }
